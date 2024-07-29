@@ -1,9 +1,6 @@
 # Node history
 
 ```
-npx express-generator --no-view
-```
-```
 npm i
 ```
 - Additional packages
@@ -22,4 +19,6 @@ npm i cors
 npm i axios
 ```
 - Run project
+```
 npm run dev
+```
