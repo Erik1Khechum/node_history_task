@@ -1,20 +1,21 @@
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+import express from "express"
+const app = express()
+import cors  from "cors"
+import cookieParser from "cookie-parser"
+import dotenv from "dotenv"
+dotenv.config()
+//---------------------cron jobs-begin---------------------------------------------
+import "./jobs/actionsCrone.js"
+import "./jobs/actionsCleaner.js"
+//---------------------cron jobs-end-----------------------------------------------
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+app.use(cors({
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+}))
 
-const app = express();
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-module.exports = app;
+export default app
